@@ -34,7 +34,7 @@ import com.example.praktikum6.ui.theme.Praktikum6Theme
 
 @Composable
 fun HalamanHome(
-    onNextButtonClick: () -> Unit
+    onNextButtonClicked: () -> Unit
 ) {
     val image = painterResource(id = R.drawable.esteh)
     Column(
@@ -88,7 +88,8 @@ fun HalamanHome(
         ) {
             Button(
                 modifier = Modifier.weight(1f),
-                onClick = onNextButtonClick
+                onClick = onNextButtonClicked
+
             ) {
                 Text(stringResource(R.string.next))
             }
@@ -96,11 +97,10 @@ fun HalamanHome(
     }
 }
 
-@Preview(showBackground = false)
+@Preview(showBackground = true)
 @Composable
-fun prev() {
+fun PreviewHalamanHome() {
     Praktikum6Theme {
-        HalamanHome {
-        }
+        HalamanHome(onNextButtonClicked = {})
     }
 }
