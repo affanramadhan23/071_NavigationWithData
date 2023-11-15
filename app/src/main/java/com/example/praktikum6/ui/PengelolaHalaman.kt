@@ -24,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.praktikum6.Data.SumberData
+import com.example.praktikum6.HalamanForm
 import com.example.praktikum6.HalamanHome
 import com.example.praktikum6.HalamanSatu
 import com.example.praktikum6.OrderViewModel
@@ -33,7 +34,8 @@ import com.example.praktikum6.R
 enum class PengelolaHalaman {
     Home,
     Rasa,
-    Summary
+    Summary,
+    Formulir
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,8 +83,14 @@ fun EsJumboApp(
         {
             composable(route = PengelolaHalaman.Home.name) {
                 HalamanHome(
-                    onNextButtonClicked = {navController.navigate(PengelolaHalaman.Rasa.name)}
+                    onNextButtonClicked = {navController.navigate(PengelolaHalaman.Formulir.name)}
                 )
+            }
+            composable(route = PengelolaHalaman.Formulir.name) {
+                HalamanForm(onSubmitButtonClick = {
+                    viewModel.setContact(it)
+                    navController.navigate(PengelolaHalaman.Rasa.name)
+                })
             }
             composable(route = PengelolaHalaman.Rasa.name) {
                 val context = LocalContext.current
