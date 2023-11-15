@@ -11,7 +11,7 @@ import java.text.NumberFormat
 private const val HARGA_PER_CUP = 3000
 
 class OrderViewModel : ViewModel()   {
-    private val _stateUI = MutableStateFlow(OrderUIState())
+    private  val _stateUI = MutableStateFlow(OrderUIState())
     val stateUI: StateFlow<OrderUIState> = _stateUI.asStateFlow()
 
     fun setJumlah(jumlEsJumbo:Int) {
