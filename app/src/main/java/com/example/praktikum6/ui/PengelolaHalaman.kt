@@ -107,14 +107,13 @@ fun EsJumboApp(
                     onSelectionChanged = { viewModel.setRasa(it) },
                     onConfirmButtonClicked = { viewModel.setJumlah(it) },
                     onNextButtonClicked = { navController.navigate(PengelolaHalaman.Summary.name) },
-                    onCancelButtonClicked = { cancelOrderAndNavigateToHome(viewModel, navController) }
+                    onCancelButtonClicked = { cancelOrderAndNavigateToForm(viewModel, navController) }
                 )
             }
             composable(route = PengelolaHalaman.Summary.name) {
                 HalamanDua(
                     orderUiState = uiState,
-                    onCancelButtonCLicked = { cancelOrderAndNavigateToForm(
-                        viewModel,
+                    onCancelButtonCLicked = { cancelOrderAndNavigateToRasa(
                         navController) },
                 )
             }
