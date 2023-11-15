@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -87,10 +88,15 @@ fun EsJumboApp(
                 )
             }
             composable(route = PengelolaHalaman.Formulir.name) {
-                HalamanForm(onSubmitButtonClick = {
-                    viewModel.setContact(it)
-                    navController.navigate(PengelolaHalaman.Rasa.name)
-                })
+                HalamanForm(
+                    onSubmitButtonClick = {
+                        viewModel.setContact(it)
+                        navController.navigate(PengelolaHalaman.Rasa.name)
+                    },
+                    onCancelButtonClick = {
+                        cancelOrderAndNavigateToHome(viewModel, navController)
+                    }
+                )
             }
             composable(route = PengelolaHalaman.Rasa.name) {
                 val context = LocalContext.current
@@ -107,7 +113,9 @@ fun EsJumboApp(
             composable(route = PengelolaHalaman.Summary.name) {
                 HalamanDua(
                     orderUiState = uiState,
-                    onCancelButtonCLicked = { cancelOrderAndNavigateToRasa(navController) },
+                    onCancelButtonCLicked = { cancelOrderAndNavigateToForm(
+                        viewModel,
+                        navController) },
                 )
             }
         }
@@ -116,10 +124,17 @@ fun EsJumboApp(
 
 private fun cancelOrderAndNavigateToHome(
     viewModel: OrderViewModel,
-    navController: NavHostController
+    navController: NavController
 ) {
     viewModel.resetOrder()
     navController.popBackStack(PengelolaHalaman.Home.name, inclusive = false)
+}
+private fun cancelOrderAndNavigateToForm(
+    viewModel: OrderViewModel,
+    navController: NavHostController
+) {
+    viewModel.resetOrder()
+    navController.popBackStack(PengelolaHalaman.Formulir.name, inclusive = false)
 }
 
 private fun cancelOrderAndNavigateToRasa(
