@@ -23,4 +23,6 @@ fun HalamanForm(
     var telponTxt by rememberSaveable {
         mutableStateOf("")
     }
+
+    var listDataTxt : MutableList<String> = mutableListOf(namaTxt, alamatTxt, telponTxt)
 }
